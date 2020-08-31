@@ -25,7 +25,7 @@ if __name__ == "__main__":
     data_scale = 50
 
     gm_centers = np.random.rand(class_num, feat_dim) * data_scale # uniform, (0 ,1)
-    gm_stds = np.random.rand(class_num) * 0.5 + 0.7 
+    gm_stds = np.random.rand(class_num) * 0.5 + 1
     gm_colors = np.random.rand(class_num, 3) * 0.8 + 0.2
 
     gm_X, gm_y = make_blobs(n_samples = data_amout, n_features = feat_dim, centers = gm_centers,
@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
     plt.scatter(gm_X[:, 0], gm_X[:, 1], marker='o', s = 10) 
     plt.scatter(gm_centers[:, 0], gm_centers[:, 1], marker='x', s = 25, c = "r") 
-
+    plt.title("Orignal Dist. ")
     plt.show()
 
 
@@ -50,6 +50,7 @@ if __name__ == "__main__":
     plt.scatter(gm_X[:, 0], gm_X[:, 1], c = gm_colors[y_pred.tolist()])
     plt.scatter(gm_centers[:, 0], gm_centers[:, 1], marker='x', s = 25, c = "r") 
     plt.scatter(center_pred[:, 0], center_pred[:, 1], marker='x', s = 25, c = "k") 
+    plt.title("K-Means(pure) Cluster Res. ")
     plt.show()
 
 
