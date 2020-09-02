@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     plt.scatter(gm_X_flat[:, 0], gm_X_flat[:, 1], marker='o', s = 10) 
     plt.scatter(gm_centers[:, 0], gm_centers[:, 1], marker='x', s = 25)
-    plt.title("Orignal Axis Dist. ") 
+    plt.title("Orignal Axis Dist.(First 2 dims)") 
     plt.show()
 
     gm_pca = IncrementalPCA(n_components = 20, batch_size = BS)
@@ -63,17 +63,13 @@ if __name__ == "__main__":
     gm_S = gm_pca.transform(gm_X_flat) # S = U^T * X * V; shape (32560, 2)
     gm_Scenters = gm_pca.transform(gm_centers)
 
-    plt.scatter(gm_S[:, 0], gm_S[:, 1], marker='o', s = 10) 
+    plt.scatter(gm_S[:, 0], gm_S[:, 1], marker='o', c = "y", s = 10) 
     plt.scatter(gm_Scenters[:, 0], gm_Scenters[:, 1], marker='x', s = 25, c = "r") 
-    plt.title("Decomposed Axis Dist. ")
+    plt.title("PCA(incremental) Axis Dist.(First 2 dims)")
     plt.show()
 
     gm_X_less = gm_pca.inverse_transform(gm_S)
     plt.scatter(gm_X_less[:, 0], gm_X_less[:, 1], marker='o', s = 10) 
     plt.scatter(gm_centers[:, 0], gm_centers[:, 1], marker='x', s = 25, c = "r") 
-    plt.title("Back to Origin Axis Dist. ") #  X_less = U * S * V^T; shape (32560, 21)
+    plt.title("Back to Origin Axis Dist.(First 2 dims)") #  X_less = U * S * V^T; shape (32560, 21)
     plt.show()
-    
-    
-
-
