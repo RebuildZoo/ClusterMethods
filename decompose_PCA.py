@@ -1,4 +1,5 @@
 '''
+PCA (Principal Component Analysis)
 use PCA in sklearn to do decomposition
 
 Confirm the first-K dim of the dist always has max variance. 
@@ -41,15 +42,16 @@ if __name__ == "__main__":
 
     print("[info] data amout: %04d data dim: %04d"%(gm_X.shape[0], gm_X.shape[1]))
 
-    plt.scatter(gm_X[:, 0], gm_X[:, 1], marker='o', s = 10) 
-    plt.scatter(gm_centers[:, 0], gm_centers[:, 1], marker='x', s = 25, c = "r") 
-    plt.title("Orignal Axis Dist.(First 2 dims)")
-    plt.show()
+    # plt.scatter(gm_X[:, 0], gm_X[:, 1], marker='o', s = 10) 
+    # plt.scatter(gm_centers[:, 0], gm_centers[:, 1], marker='x', s = 25, c = "r") 
+    # plt.title("Orignal Axis Dist.(First 2 dims)")
+    # plt.show()
 
 
     # gm_pca = PCA(n_components = comp_dim)
     # gm_pca = PCA(n_components = 0.95, svd_solver = "auto")
-    gm_pca = PCA(n_components = 20, svd_solver = "auto")
+    saved_pca_comp = 2
+    gm_pca = PCA(n_components = saved_pca_comp, svd_solver = "auto")
     '''
     auto : auto-selected; 
     randomized: data_num M >> data_dim N; 
@@ -68,13 +70,15 @@ if __name__ == "__main__":
 
     plt.scatter(gm_S[:, 0], gm_S[:, 1], marker='o',c = "g", s = 10) 
     plt.scatter(gm_Scenters[:, 0], gm_Scenters[:, 1], marker='x', s = 25, c = "r") 
-    plt.title("PCA(pure) Axis Dist.(First 2 dims)")
+    plt.title("PCA Axis Dist.(First 2 dims)")
     plt.show()
 
     gm_X_less = gm_pca.inverse_transform(gm_S)
+    gm_ceneters_less = gm_pca.inverse_transform(gm_Scenters)
     plt.scatter(gm_X_less[:, 0], gm_X_less[:, 1], marker='o', s = 10) 
     plt.scatter(gm_centers[:, 0], gm_centers[:, 1], marker='x', s = 25, c = "r") 
-    plt.title("Back to Origin Axis Dist.(First 2 dims)") #  X_less = U * S * V^T; shape (32560, 21)
+    plt.scatter(gm_ceneters_less[:, 0], gm_ceneters_less[:, 1], marker='x', s = 25, c = "k") 
+    plt.title("Remap by %d PCs , explain %0.2f(First 2 dims)"%(saved_pca_comp, sum(gm_pca.explained_variance_ratio_))) #  X_less = U * S * V^T; shape (32560, 21)
     plt.show()
 
 
