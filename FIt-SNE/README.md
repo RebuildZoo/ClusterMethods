@@ -1,4 +1,6 @@
 # FFT-accelerated Interpolation-based t-SNE (FIt-SNE)
+Origin project: [FIt-SNE](https://github.com/KlugerLab/FIt-SNE)
+
 ## Introduction
 t-Stochastic Neighborhood Embedding ([t-SNE](https://lvdmaaten.github.io/tsne/)) is a highly successful method for dimensionality reduction and visualization of high dimensional datasets.  A popular [implementation](https://github.com/lvdmaaten/bhtsne) of t-SNE uses the Barnes-Hut algorithm to approximate the gradient at each iteration of gradient descent. We accelerated this implementation as follows:
 
