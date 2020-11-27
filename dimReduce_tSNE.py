@@ -61,7 +61,7 @@ def plot_scatters(data2D, class_num_Lst):
 
         index_begin += index_interval_i
 
-    plt.title("Orignal Axis Dist.(First 2 dims)")
+    plt.title("tSNE 2D Axis Dist.")
     plt.tight_layout()
     plt.show()
 
@@ -72,7 +72,6 @@ if __name__ == "__main__":
 
     gm_X1 = np.random.uniform(0, 2, (sample_num, feat_dim))
     gm_X2 = np.random.uniform(-1, 1, (sample_num, feat_dim))
-
     gm_X3 = np.random.rand(sample_num, feat_dim)
     gm_X4 = np.random.rand(sample_num, feat_dim) * 3
 
