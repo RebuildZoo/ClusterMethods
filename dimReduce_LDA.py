@@ -11,6 +11,7 @@ from sklearn.datasets import make_blobs
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 import matplotlib.pyplot as plt
 
+from mpl_toolkits.mplot3d import Axes3D
 
 if __name__ == "__main__":
 
@@ -39,17 +40,31 @@ if __name__ == "__main__":
 
     plt.scatter(gm_X[:, 0], gm_X[:, 1], marker='o', s = 10, c = gm_colors[gm_y]) 
     plt.scatter(gm_centers[:, 0], gm_centers[:, 1], marker='x', s = 25, c = "r") 
-    plt.title("Orignal Axis Dist.(First 2 dims)")
+    plt.title("Orignal Axis Dist with Class Label.(First 2 dims)")
+    plt.show()
+
+    fig = plt.figure(figsize=(6,4))
+    axes3D = Axes3D(fig)
+    axes3D.scatter3D(gm_X[:, 0], gm_X[:, 1], gm_X[:, 2], marker='o',c = gm_colors[gm_y])
+    plt.scatter(gm_centers[:, 0], gm_centers[:, 1], gm_centers[:, 2], marker='x',c = 'r')
+    plt.title("Orignal Axis Dist with Class Label.(First 3 dims)")
     plt.show()
 
 
-    gm_lda = LinearDiscriminantAnalysis(n_components = 2)
+    gm_lda = LinearDiscriminantAnalysis(n_components = 3)
     gm_lda.fit(gm_X, gm_y)
 
     gm_S = gm_lda.transform(gm_X)
     gm_Scenters = gm_lda.transform(gm_centers)
 
-    plt.scatter(gm_S[:, 0], gm_S[:, 1],marker='o',c = gm_colors[gm_y])
-    plt.scatter(gm_Scenters[:, 0], gm_Scenters[:, 1],marker='x',c = 'r')
-    plt.title("LDA Axis Dist.( 2 dims)")
+    # plt.scatter(gm_S[:, 0], gm_S[:, 1],marker='o',c = gm_colors[gm_y])
+    # plt.scatter(gm_Scenters[:, 0], gm_Scenters[:, 1],marker='x',c = 'r')
+    # plt.title("LDA Axis Dist.( 2 dims)")
+    # plt.show()
+
+    fig = plt.figure(figsize=(6,4))
+    axes3D = Axes3D(fig)
+    axes3D.scatter3D(gm_S[:, 0], gm_S[:, 1], gm_S[:, 2], marker='o',c = gm_colors[gm_y])
+    plt.scatter(gm_Scenters[:, 0], gm_Scenters[:, 1], gm_Scenters[:, 2], marker='x',c = 'r')
+    plt.title("LDA Axis Dist.( 3 dims)")
     plt.show()
